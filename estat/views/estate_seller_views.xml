@@ -1,0 +1,39 @@
+<odoo>
+    <!-- Tree View for Seller -->
+    <record id="view_estate_seller_tree" model="ir.ui.view">
+        <field name="name">estate.seller.tree</field>
+        <field name="model">estate.seller</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="email"/>
+                <field name="phone"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form View for Seller -->
+    <record id="view_estate_seller_form" model="ir.ui.view">
+        <field name="name">estate.seller.form</field>
+        <field name="model">estate.seller</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="email"/>
+                        <field name="phone"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action for Seller -->
+    <record id="estate_seller_action" model="ir.actions.act_window">
+        <field name="name">Sellers</field>
+        <field name="res_model">estate.seller</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_ids" eval="[(5, 0, 0), (0, 0, {'view_mode': 'tree', 'view_id': ref('view_estate_seller_tree')}), (0, 0, {'view_mode': 'form', 'view_id': ref('view_estate_seller_form')})]"/>
+    </record>
+</odoo>

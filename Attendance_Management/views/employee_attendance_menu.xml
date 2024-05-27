@@ -1,0 +1,24 @@
+<odoo>
+     <!-- Menus -->
+    <menuitem id="menu_attendance_management_root"
+              name="Attendance Management"
+              sequence="10"
+              groups="base.group_user"/>
+
+    <menuitem id="menu_attendance_management"
+              name="Attendances"
+              parent="menu_attendance_management_root"
+              action="action_employee_attendance_tree"
+              sequence="20"
+              groups="base.group_user"/>
+
+    <menuitem id="menu_attendance_management_form"
+              name="Add Attendance"
+              parent="menu_attendance_management_root"
+              action="action_employee_attendance_form"
+              sequence="30"
+              groups="base.group_user"/>
+
+
+
+</odoo>

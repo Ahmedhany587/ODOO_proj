@@ -1,0 +1,42 @@
+<odoo>
+    <!-- Define the report action -->
+    <record id="employee_attendance_report" model="ir.actions.report">
+        <field name="name">Employee Attendance Report</field>
+        <field name="model">employee.attendance</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">Attendance_Management.report_employee_attendance</field>
+        <field name="report_file">Attendance_Management.report_employee_attendance</field>
+        <field name="binding_model_id" ref="model_employee_attendance"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <!-- Define the QWeb template for the report -->
+    <template id="report_employee_attendance">
+        <t t-call="web.external_layout">
+            <div class="page">
+                <h2>Employee Attendance Report</h2>
+                <t t-foreach="docs" t-as="doc">
+                    <div>
+                        <strong>Employee Name:</strong> <span t-field="doc.employee_id.name"/>
+                    </div>
+                    <div>
+                        <strong>Check In:</strong> <span t-field="doc.check_in"/>
+                    </div>
+                    <div>
+                        <strong>Check Out:</strong> <span t-field="doc.check_out"/>
+                    </div>
+                    <div>
+                        <strong>Worked Hours:</strong> <span t-field="doc.worked_hours"/>
+                    </div>
+                    <div>
+                        <strong>Rate per Hour:</strong> <span t-field="doc.rate_per_hour"/>
+                    </div>
+                    <div>
+                        <strong>Total Amount:</strong> <span t-field="doc.total_amount"/>
+                    </div>
+                    <br/>
+                </t>
+            </div>
+        </t>
+    </template>
+</odoo>

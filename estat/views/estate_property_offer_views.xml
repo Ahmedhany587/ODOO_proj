@@ -1,0 +1,43 @@
+<odoo>
+    <!-- Tree View for Property Offer -->
+    <record id="view_estate_property_offer_tree" model="ir.ui.view">
+        <field name="name">estate.property.offer.tree</field>
+        <field name="model">estate.property.offer</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="price"/>
+                <field name="seller_id"/>
+                <field name="status"/>
+                <field name="validity"/>
+                <field name="date_deadline"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form View for Property Offer -->
+    <record id="view_estate_property_offer_form" model="ir.ui.view">
+        <field name="name">estate.property.offer.form</field>
+        <field name="model">estate.property.offer</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="price"/>
+                        <field name="seller_id"/>
+                        <field name="status"/>
+                        <field name="validity"/>
+                        <field name="date_deadline"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action for Property Offer -->
+    <record id="estate_property_offer_action" model="ir.actions.act_window">
+        <field name="name">Property Offers</field>
+        <field name="res_model">estate.property.offer</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_ids" eval="[(5, 0, 0), (0, 0, {'view_mode': 'tree', 'view_id': ref('view_estate_property_offer_tree')}), (0, 0, {'view_mode': 'form', 'view_id': ref('view_estate_property_offer_form')})]"/>
+    </record>
+</odoo>
