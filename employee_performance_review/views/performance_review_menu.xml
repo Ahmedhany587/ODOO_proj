@@ -1,0 +1,15 @@
+<odoo>
+    <data>
+        <menuitem id="menu_performance_review_root" name="Performance Reviews"
+                  parent="hr.menu_hr_root"
+                  sequence="10"
+                  groups="base.group_user"/>
+
+        <menuitem id="menu_performance_review"
+                  name="Performance Reviews"
+                  parent="menu_performance_review_root"
+                  action="action_performance_review"
+                  sequence="20"
+                  groups="base.group_user"/>
+    </data>
+</odoo>
