@@ -7,9 +7,7 @@
             <field name="arch" type="xml">
                 <form string="Employee Performance Review">
                     <header>
-                        <!-- Non-clickable status bar for state -->
                         <field name="state" widget="statusbar"/>
-                        <!-- Buttons with conditional visibility based on state -->
                         <button name="action_confirm" type="object" string="Confirm" class="btn-primary" groups="base.group_user"/>
                         <button name="action_done" type="object" string="Done" class="btn-secondary" groups="base.group_user"/>
                     </header>

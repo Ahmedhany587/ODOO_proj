@@ -1,0 +1,33 @@
+<odoo>
+    <data noupdate="1">
+        <!-- Email Template for Pending Reviews -->
+        <record id="email_template_pending_reviews" model="mail.template">
+            <field name="name">Pending Performance Reviews Reminder</field>
+            <field name="model_id" ref="employee_performance_review.model_performance_review"/>
+            <field name="subject">Reminder: Pending Performance Reviews</field>
+            <field name="email_from">${(user.email or '')|safe}</field>
+            <field name="email_to">${(object.user_id.email)|safe}</field>
+            <field name="body_html">
+                <![CDATA[
+                <p>Dear ${object.user_id.name},</p>
+                <p>This is a reminder that you have performance reviews pending in the draft state for more than a week.</p>
+                <p>Please take the necessary actions to confirm or complete these reviews.</p>
+                <p>Best regards,</p>
+                <p>Your Company</p>
+                ]]>
+            </field>
+        </record>
+
+        <!-- Scheduled Action for Pending Reviews -->
+        <record id="ir_cron_pending_review_reminder" model="ir.cron">
+            <field name="name">Pending Performance Reviews Reminder</field>
+            <field name="model_id" ref="employee_performance_review.model_performance_review"/>
+            <field name="state">code</field>
+            <field name="code">model._send_pending_review_reminders()</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">weeks</field>
+            <field name="numbercall">-1</field>
+            <field name="doall" eval="False"/>
+        </record>
+    </data>
+</odoo>

@@ -1,10 +1,13 @@
 <odoo>
     <data>
-        <menuitem id="menu_performance_review_root" name="Performance Reviews"
+        <!-- Root Menu Item -->
+        <menuitem id="menu_performance_review_root"
+                  name="Performance Reviews"
                   parent="hr.menu_hr_root"
                   sequence="10"
                   groups="base.group_user"/>
 
+        <!-- Sub Menu Item -->
         <menuitem id="menu_performance_review"
                   name="Performance Reviews"
                   parent="menu_performance_review_root"

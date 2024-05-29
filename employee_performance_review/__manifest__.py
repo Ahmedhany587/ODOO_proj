@@ -5,6 +5,7 @@
     'description': """Long description part""",
     'category': 'Human Resources',
     'author': "Quadova",
+    'license': 'AGPL-3',
     'website': "https://www.Quadova.com",
     'depends': ['base', 'hr'],
     'data': [
@@ -12,6 +13,7 @@
         'security/performance_review_security.xml',
         'views/performance_review_views.xml',
         'views/performance_review_menu.xml',
+        'data\performance_review_data.xml',
 
     ],
     'demo': [],
