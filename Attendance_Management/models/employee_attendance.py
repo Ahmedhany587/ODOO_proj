@@ -1,17 +1,22 @@
 from odoo import models, fields, api
 from odoo.exceptions import UserError
-from datetime import datetime
 
 class EmployeeAttendance(models.Model):
     _name = 'employee.attendance'
     _description = 'Employee Attendance'
+    _rec_name = "employee_id"
 
     employee_id = fields.Many2one('hr.employee', string="Employee", required=True)
-    check_in = fields.Datetime(string="Check In")
-    check_out = fields.Datetime(string="Check Out")
+    check_in = fields.Datetime(string="Check In", readonly=True)
+    check_out = fields.Datetime(string="Check Out", readonly=True)
     worked_hours = fields.Float(string="Worked Hours", compute='_compute_worked_hours', store=True)
     rate_per_hour = fields.Float(string="Rate/Hour", required=True, default=0.0)
     total_amount = fields.Float(string="Total Amount", compute='_compute_total_amount', store=True)
+    state = fields.Selection([
+        ('draft', 'Draft'),
+        ('check_in', 'Check In'),
+        ('check_out', 'Check Out')
+    ], string="Status", default='draft', readonly=True)
 
     @api.depends('check_in', 'check_out')
     def _compute_worked_hours(self):
@@ -29,17 +34,16 @@ class EmployeeAttendance(models.Model):
 
     def action_check_in(self):
         for record in self:
-            if not record.check_in:
-                record.check_in = datetime.now()
+            if record.state == 'draft':
+                record.check_in = fields.Datetime.now()
+                record.state = 'check_in'
             else:
-                raise UserError("Check In already recorded.")
+                raise UserError("Check In already recorded or invalid state.")
 
     def action_check_out(self):
         for record in self:
-            if record.check_in:
-                if not record.check_out:
-                    record.check_out = datetime.now()
-                else:
-                    raise UserError("Check Out already recorded.")
+            if record.state == 'check_in':
+                record.check_out = fields.Datetime.now()
+                record.state = 'check_out'
             else:
-                raise UserError("You must check in before you can check out.")
+                raise UserError("Check Out already recorded or invalid state.")

@@ -5,17 +5,22 @@
         <field name="model">employee.attendance</field>
         <field name="arch" type="xml">
             <form string="Employee Attendance">
+                <header>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,check_in,check_out"/>
+                </header>
                 <sheet>
                     <group>
                         <field name="employee_id"/>
                     </group>
                     <group>
                         <field name="check_in" readonly="1"/>
-                        <button name="action_check_in" string="Check In" type="object" class="oe_highlight"/>
+                        <button name="action_check_in" string="Check In" type="object" class="oe_highlight"
+                                invisible="state != 'draft'"/>
                     </group>
                     <group>
                         <field name="check_out" readonly="1"/>
-                        <button name="action_check_out" string="Check Out" type="object" class="oe_highlight"/>
+                        <button name="action_check_out" string="Check Out" type="object" class="oe_highlight"
+                                invisible="state != 'check_in'"/>
                     </group>
                     <group>
                         <field name="worked_hours" readonly="1"/>
@@ -39,6 +44,7 @@
                 <field name="worked_hours"/>
                 <field name="rate_per_hour"/>
                 <field name="total_amount"/>
+                <field name="state"/>
             </tree>
         </field>
     </record>
